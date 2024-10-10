@@ -11,7 +11,7 @@
 - [X] Deve ser possível usuário mudar senha
 - [ ] Deve ser possível cadastrar, editar e apagar tarefa
 - [ ] Deve ser possível cadastrar, editar e apagar conclusão de tarefa
-- [ ] Deve ser possível consultar tarefas pendentes por gerente por mês
+- [ ] Deve ser possível consultar tarefas por gerente por mês
 
 
 ### Regras de Negócio (RNs)
