@@ -2,12 +2,13 @@ import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 import { updatePassword } from '../../use-cases/user/update-password'
 import { verifyJWT } from '../middlewares/verify-jwt'
+import { verifyRole } from '../middlewares/verify-role'
 
 export const updateUserPasswordRoute: FastifyPluginAsyncZod = async app => {
   app.patch(
     '/users/change-password',
     {
-      onRequest: [verifyJWT],
+      onRequest: [verifyJWT, verifyRole],
       schema: {
         body: z.object({
           password: z.string().min(6),

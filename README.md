@@ -7,7 +7,7 @@
 ### Requisitos Funcionais (RFs)
 
 - [ ] Deve ser possível cadastrar, editar e apagar usuário
-- [ ] Deve ser possível usuário se autenticar
+- [X] Deve ser possível usuário se autenticar
 - [X] Deve ser possível usuário mudar senha
 - [ ] Deve ser possível cadastrar, editar e apagar tarefa
 - [ ] Deve ser possível cadastrar, editar e apagar conclusão de tarefa
