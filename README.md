@@ -20,7 +20,7 @@
 
 ### Requisitos Não-Funcionais (RNFs)
 
-- [ ] A senha do usuário precisa estar criptografada
+- [X] A senha do usuário precisa estar criptografada
 - [ ] Os dados da aplicação precisam estar persistido em um banco PostgreSQL
 - [ ] O usuário deve ser identificado por um JWT (Json Web Token)
 
