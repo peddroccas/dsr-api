@@ -12,3 +12,41 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum Role {
+  ADMIN
+  MANAGER
+}
+
+model User {
+  id            String       @id @default(uuid())
+  name          String
+  email         String
+  password_hash String
+  role          Role
+  completions   Completion[]
+
+  @@map("users")
+}
+
+model Task {
+  id         String       @id @default(uuid())
+  title      String
+  deadline   DateTime
+  Completion Completion[]
+
+  @@map("tasks")
+}
+
+model Completion {
+  id           String   @id @default(uuid())
+  image        String
+  completed_at DateTime @default(now())
+
+  task   Task   @relation(fields: [taskId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+  taskId String
+
+  @@map("completions")
+}
