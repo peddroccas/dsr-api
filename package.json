@@ -1,19 +1,4 @@
 {
-  "dependencies": {
-    "@fastify/cors": "^10.0.1",
-    "@prisma/client": "^5.20.0",
-    "fastify": "^5.0.0",
-    "fastify-type-provider-zod": "^4.0.2",
-    "zod": "^3.23.8"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^1.9.3",
-    "@types/node": "^22.7.5",
-    "prisma": "^5.20.0",
-    "tsup": "^8.3.0",
-    "tsx": "^4.19.1",
-    "typescript": "^5.6.3"
-  },
   "name": "api",
   "version": "1.0.0",
   "description": "",
@@ -25,5 +10,23 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^10.0.1",
+    "@fastify/jwt": "9.0.1",
+    "@prisma/client": "^5.20.0",
+    "bcryptjs": "2.4.3",
+    "fastify": "^5.0.0",
+    "fastify-type-provider-zod": "^4.0.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.3",
+    "@types/bcryptjs": "2.4.6",
+    "@types/node": "^22.7.5",
+    "prisma": "^5.20.0",
+    "tsup": "^8.3.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
+  }
 }

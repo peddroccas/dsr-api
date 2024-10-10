@@ -5,6 +5,7 @@ import {
   serializerCompiler,
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod'
+import { userRoutes } from './controllers/user'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -14,6 +15,8 @@ app.register(fastifyCors, {
 
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
+
+app.register(userRoutes)
 
 app
   .listen({
