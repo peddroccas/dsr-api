@@ -2,13 +2,13 @@ import type { Task } from '@prisma/client'
 import { prisma } from '../../lib/prisma'
 import { checkTaskAlreadyExists } from './check-task-already-exists'
 
-interface UpdateNewTaskRequest {
+interface UpdateRequest {
   id: string
   title: string
   monthlyFrequency: number
 }
 
-interface UpdateNewTaskResponse {
+interface UpdateResponse {
   task: Task
 }
 
@@ -16,7 +16,7 @@ export async function updateTask({
   id,
   title,
   monthlyFrequency,
-}: UpdateNewTaskRequest): Promise<UpdateNewTaskResponse> {
+}: UpdateRequest): Promise<UpdateResponse> {
   const task = await prisma.task.update({
     where: { id },
     data: {

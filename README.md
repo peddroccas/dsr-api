@@ -9,7 +9,7 @@
 - [X] Deve ser possível cadastrar, editar e apagar usuário
 - [X] Deve ser possível usuário se autenticar
 - [X] Deve ser possível usuário mudar senha
-- [ ] Deve ser possível cadastrar, editar e apagar tarefa
+- [X] Deve ser possível cadastrar, editar e apagar tarefa
 - [ ] Deve ser possível cadastrar, editar e apagar conclusão de tarefa
 - [ ] Deve ser possível consultar tarefas por gerente por mês
 
@@ -22,8 +22,8 @@
 ### Requisitos Não-Funcionais (RNFs)
 
 - [X] A senha do usuário precisa estar criptografada
-- [ ] Os dados da aplicação precisam estar persistido em um banco PostgreSQL
-- [ ] O usuário deve ser identificado por um JWT (Json Web Token)
+- [X] Os dados da aplicação precisam estar persistido em um banco PostgreSQL
+- [X] O usuário deve ser identificado por um JWT (Json Web Token)
 
 ## 🛠 Tecnologias Utilizadas
 
