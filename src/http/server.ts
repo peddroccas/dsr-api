@@ -9,6 +9,7 @@ import { userRoutes } from './controllers/user'
 import fastifyJwt from '@fastify/jwt'
 import { env } from '../env'
 import { taskRoutes } from './controllers/task'
+import { completionRoutes } from './controllers/completion'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -33,3 +34,4 @@ app
 
 app.register(userRoutes)
 app.register(taskRoutes)
+app.register(completionRoutes)
