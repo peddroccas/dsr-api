@@ -1,11 +1,9 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
-import { updatePassword } from '../../use-cases/user/update-password'
 import { verifyJWT } from '../middlewares/verify-jwt'
 import { verifyRole } from '../middlewares/verify-role'
 import { updateUser } from '../../use-cases/user/update-user'
 import { UnauthorizedError } from '../../use-cases/errors/unauthorized'
-import { checkEmailAlreadyExists } from '../../use-cases/user/check-email-already-exists'
 
 export const updateUserRoute: FastifyPluginAsyncZod = async app => {
   app.put(

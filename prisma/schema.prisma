@@ -30,10 +30,10 @@ model User {
 }
 
 model Task {
-  id         String       @id @default(uuid())
-  title      String
-  deadline   DateTime
-  Completion Completion[]
+  id                String       @id @default(uuid())
+  title             String
+  monthly_frequency Int          @default(1)
+  completions       Completion[]
 
   @@map("tasks")
 }
