@@ -1,4 +1,3 @@
-import type { User } from '@prisma/client'
 import { prisma } from '../../lib/prisma'
 import { DuplicatedCredentialsError } from '../errors/duplicated-credentials'
 

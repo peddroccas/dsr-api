@@ -8,6 +8,7 @@ import {
 import { userRoutes } from './controllers/user'
 import fastifyJwt from '@fastify/jwt'
 import { env } from '../env'
+import { taskRoutes } from './controllers/task'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -22,8 +23,6 @@ app.register(fastifyCors, {
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
-app.register(userRoutes)
-
 app
   .listen({
     port: 3333,
@@ -31,3 +30,6 @@ app
   .then(() => {
     console.log('HTTP Server Running!')
   })
+
+app.register(userRoutes)
+app.register(taskRoutes)
