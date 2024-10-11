@@ -1,7 +1,6 @@
 import type { User } from '@prisma/client'
 import { prisma } from '../../lib/prisma'
 import { hash } from 'bcryptjs'
-import { DuplicatedCredentialsError } from '../errors/duplicated-credentials'
 import { checkEmailAlreadyExists } from './check-email-already-exists'
 
 interface CreateNewUserRequest {
@@ -11,7 +10,7 @@ interface CreateNewUserRequest {
 }
 
 interface CreateNewUserResponse {
-  user: User
+  user: Omit<User, 'password_hash'>
 }
 
 export async function createNewUser({
