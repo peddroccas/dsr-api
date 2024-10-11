@@ -30,10 +30,10 @@ model User {
 }
 
 model Task {
-  id                String       @id @default(uuid())
-  title             String       @unique
-  monthly_frequency Int          @default(1)
-  completions       Completion[]
+  id               String       @id @default(uuid())
+  title            String       @unique
+  weekly_frequency Int          @default(1)
+  completions      Completion[]
 
   @@map("tasks")
 }
@@ -42,6 +42,7 @@ model Completion {
   id           String   @id @default(uuid())
   image        String
   completed_at DateTime @default(now())
+  is_valid     Boolean  @default(false)
 
   task   Task   @relation(fields: [taskId], references: [id])
   user   User   @relation(fields: [userId], references: [id])

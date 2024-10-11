@@ -21,6 +21,7 @@
     "enabled": true,
     "rules": {
       "complexity": { "noForEach": "off" },
+      "style": { "useConst": "off" },
       "recommended": true
     }
   },
