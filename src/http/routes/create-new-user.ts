@@ -1,14 +1,13 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 import { createNewUser } from '../../use-cases/user/create-new-user'
-import { verifyJWT } from '../middlewares/verify-jwt'
-import { verifyAdmin } from '../middlewares/verify-admin'
+import { verifyHasAdmin } from '../middlewares/verify-has-admin'
 
 export const createNewUserRoute: FastifyPluginAsyncZod = async app => {
   app.post(
     '/users',
     {
-      onRequest: [verifyJWT, verifyAdmin],
+      onRequest: [verifyHasAdmin],
       schema: {
         body: z.object({
           name: z.string(),
