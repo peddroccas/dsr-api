@@ -4,7 +4,7 @@ import { getPendingTasksByManager } from '../../use-cases/task/get-pending-tasks
 import { verifyAdmin } from '../middlewares/verify-admin'
 import { getManagers } from '../../use-cases/user/get-managers'
 
-export const getPendingTasksByManagerRoute: FastifyPluginAsyncZod =
+export const getAllPendingTasksByManagerRoute: FastifyPluginAsyncZod =
   async app => {
     app.get(
       '/managers/tasks',
