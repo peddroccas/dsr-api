@@ -5,7 +5,7 @@ import { getPendingTasksByManager } from '../../use-cases/task/get-pending-tasks
 export const getPendingTasksByManagerRoute: FastifyPluginAsyncZod =
   async app => {
     app.get(
-      '/managers/task',
+      '/manager/task',
       {
         onRequest: [verifyJWT],
       },
