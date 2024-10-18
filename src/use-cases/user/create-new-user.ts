@@ -29,6 +29,12 @@ export async function createNewUser({
       role: role,
       password_hash,
     },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      role: true,
+    },
   })
 
   return { user }
