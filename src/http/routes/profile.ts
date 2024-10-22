@@ -14,7 +14,7 @@ export const profileRoute: FastifyPluginAsyncZod = async app => {
 
       const { profile } = await getProfile({ id })
 
-      reply.status(201).send({ profile })
+      reply.status(201).send(profile)
     }
   )
 }
