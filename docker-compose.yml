@@ -1,18 +1,18 @@
 version: '3.8'
 
 services:
-  task-management-db:
+  dsr-db:
     image: bitnami/postgresql:latest
     ports:
       - '5432:5432'
     environment:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=taskmanagementdb
+      - POSTGRES_DB=dsrdb
     volumes:
-      - task-management-pg:/bitnami/postgresql
+      - dsr-pg:/bitnami/postgresql
 
-  task-management-api:
+  dsr-api:
     build: .
     ports:
       - '3333:3333'
@@ -20,9 +20,9 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - DATABASE_URL=${DATABASE_URL}
     depends_on:
-      - task-management-db
+      - dsr-db
     restart: always
     
 volumes:
-    task-management-pg:
+    dsr-pg:
 

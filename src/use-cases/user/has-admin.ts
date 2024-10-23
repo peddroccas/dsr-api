@@ -1,7 +1,8 @@
+import type { User } from '@prisma/client'
 import { prisma } from '../../lib/prisma'
 
 interface HasAdminResponse {
-  hasAdmin: boolean
+  admins: User[]
 }
 
 export async function hasAdmins(): Promise<HasAdminResponse> {
@@ -9,9 +10,5 @@ export async function hasAdmins(): Promise<HasAdminResponse> {
     where: { role: 'ADMIN' },
   })
 
-  if (admins.length) {
-    return { hasAdmin: true }
-  }
-
-  return { hasAdmin: false }
+  return { admins }
 }

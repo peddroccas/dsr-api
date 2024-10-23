@@ -1,6 +1,8 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 import { createNewUser } from '../../use-cases/user/create-new-user'
+import { hasAdmins } from '../../use-cases/user/has-admin'
+import { UnauthorizedError } from '../../use-cases/errors/unauthorized'
 
 export const createFirstAdminRoute: FastifyPluginAsyncZod = async app => {
   app.post(
@@ -15,6 +17,11 @@ export const createFirstAdminRoute: FastifyPluginAsyncZod = async app => {
       },
     },
     async (request, reply) => {
+      const { admins } = await hasAdmins()
+      if (admins) {
+        throw new UnauthorizedError()
+      }
+
       const { name, email, role } = request.body
       const { user } = await createNewUser({ name, email, role })
 
