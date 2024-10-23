@@ -16,7 +16,9 @@ export async function checkEmailAlreadyExists({
 
   const emailAlreadyExists = Boolean(user)
 
-  if (emailAlreadyExists && user?.id !== id) {
-    throw new DuplicatedCredentialsError()
+  if (user) {
+    if (user.id !== id && emailAlreadyExists) {
+      throw new DuplicatedCredentialsError()
+    }
   }
 }
