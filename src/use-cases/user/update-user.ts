@@ -18,7 +18,7 @@ export async function updateUser({
   name,
   email,
 }: UpdateUserRequest): Promise<UpdateUserResponse> {
-  await checkEmailAlreadyExists({ email })
+  await checkEmailAlreadyExists({ id, email })
 
   const user = await prisma.user.update({
     where: { id },

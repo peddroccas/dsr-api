@@ -10,13 +10,13 @@ export const deleteUserRoute: FastifyPluginAsyncZod = async app => {
     {
       onRequest: [verifyJWT, verifyAdmin],
       schema: {
-        body: z.object({
+        params: z.object({
           id: z.string().uuid(),
         }),
       },
     },
     async (request, reply) => {
-      const { id } = request.body
+      const { id } = request.params
 
       const { user } = await deleteUser({ id })
 
