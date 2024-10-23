@@ -18,7 +18,8 @@ export const createFirstAdminRoute: FastifyPluginAsyncZod = async app => {
     },
     async (request, reply) => {
       const { admins } = await hasAdmins()
-      if (admins) {
+      console.log(admins)
+      if (admins.length) {
         throw new UnauthorizedError()
       }
 

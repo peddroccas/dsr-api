@@ -14,12 +14,13 @@ export const createNewUserRoute: FastifyPluginAsyncZod = async app => {
           name: z.string(),
           email: z.string().email(),
           role: z.enum(['ADMIN', 'MANAGER']),
+          storeId: z.string().uuid().optional(),
         }),
       },
     },
     async (request, reply) => {
-      const { name, email, role } = request.body
-      const { user } = await createNewUser({ name, email, role })
+      const { name, email, role, storeId } = request.body
+      const { user } = await createNewUser({ name, email, role, storeId })
 
       reply.status(201).send(user)
     }

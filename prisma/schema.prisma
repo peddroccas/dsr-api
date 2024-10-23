@@ -26,7 +26,16 @@ model User {
   role          Role
   completions   Completion[]
 
+  store    Store?  @relation(fields: [store_id], references: [id])
+  store_id String?
+
   @@map("users")
+}
+
+model Store {
+  id    String @id @default(uuid())
+  name  String
+  users User[]
 }
 
 model Task {
