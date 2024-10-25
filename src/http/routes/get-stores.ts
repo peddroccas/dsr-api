@@ -3,7 +3,7 @@ import { verifyJWT } from '../middlewares/verify-jwt'
 import { verifyAdmin } from '../middlewares/verify-admin'
 import { getStores } from '../../use-cases/store/get-stores'
 
-export const getManagersRoute: FastifyPluginAsyncZod = async app => {
+export const getStoresRoute: FastifyPluginAsyncZod = async app => {
   app.get(
     '/stores',
     {
