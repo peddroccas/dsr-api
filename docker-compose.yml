@@ -12,16 +12,16 @@ services:
     volumes:
       - dsr-pg:/bitnami/postgresql
 
-  # dsr-api:
-  #   build: .
-  #   ports:
-  #     - '3333:3333'
-  #   environment:
-  #     - JWT_SECRET=${JWT_SECRET}
-  #     - DATABASE_URL=${DATABASE_URL}
-  #   depends_on:
-  #     - dsr-db
-  #   restart: always
+  dsr-api:
+    build: .
+    ports:
+      - '3333:3333'
+    environment:
+      - JWT_SECRET=${JWT_SECRET}
+      - DATABASE_URL=${DATABASE_URL}
+    depends_on:
+      - dsr-db
+    restart: always
     
 volumes:
     dsr-pg:
