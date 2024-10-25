@@ -2,12 +2,13 @@ import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { verifyJWT } from '../middlewares/verify-jwt'
 import { z } from 'zod'
 import { getLossesByStore } from '../../use-cases/losses/get-losses-by-store'
+import { verifyAdmin } from '../middlewares/verify-admin'
 
 export const getLossesByStoreRoute: FastifyPluginAsyncZod = async app => {
   app.get(
     '/losses/:id',
     {
-      onRequest: [verifyJWT],
+      onRequest: [verifyJWT, verifyAdmin],
       schema: {
         params: z.object({
           id: z.string().uuid(),
