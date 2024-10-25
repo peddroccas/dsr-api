@@ -4,23 +4,21 @@ import { createNewUser } from '../../use-cases/user/create-new-user'
 import { verifyJWT } from '../middlewares/verify-jwt'
 import { verifyAdmin } from '../middlewares/verify-admin'
 
-export const createNewUserRoute: FastifyPluginAsyncZod = async app => {
+export const createNewAdminRoute: FastifyPluginAsyncZod = async app => {
   app.post(
-    '/users',
+    '/admin',
     {
       onRequest: [verifyJWT, verifyAdmin],
       schema: {
         body: z.object({
           name: z.string(),
           email: z.string().email(),
-          role: z.enum(['ADMIN', 'MANAGER']),
-          storeId: z.string().uuid().optional(),
         }),
       },
     },
     async (request, reply) => {
-      const { name, email, role, storeId } = request.body
-      const { user } = await createNewUser({ name, email, role, storeId })
+      const { name, email } = request.body
+      const { user } = await createNewUser({ name, email, role: 'ADMIN' })
 
       reply.status(201).send(user)
     }

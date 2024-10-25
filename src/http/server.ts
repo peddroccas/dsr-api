@@ -10,6 +10,9 @@ import fastifyJwt from '@fastify/jwt'
 import { env } from '../env'
 import { taskRoutes } from './controllers/task'
 import { completionRoutes } from './controllers/completion'
+import { invoicingRoutes } from './controllers/invoicing'
+import { lossRoutes } from './controllers/loss'
+import { storeRoutes } from './controllers/store'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -36,3 +39,6 @@ app
 app.register(userRoutes)
 app.register(taskRoutes)
 app.register(completionRoutes)
+app.register(invoicingRoutes)
+app.register(lossRoutes)
+app.register(storeRoutes)

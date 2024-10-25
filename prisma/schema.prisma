@@ -19,23 +19,60 @@ enum Role {
 }
 
 model User {
-  id            String       @id @default(uuid())
+  id            String @id @default(uuid())
   name          String
-  email         String       @unique
+  email         String @unique
   password_hash String
   role          Role
-  completions   Completion[]
 
-  store    Store?  @relation(fields: [store_id], references: [id])
-  store_id String?
+  manager Manager?
 
   @@map("users")
 }
 
 model Store {
-  id    String @id @default(uuid())
-  name  String
-  users User[]
+  id         String      @id @default(uuid())
+  name       String
+  managers   Manager[]
+  invoicings Invoicing[]
+  losses     Loss[]
+
+  @@map("stores")
+}
+
+model Invoicing {
+  id       String   @id @default(uuid())
+  value    Float
+  date     DateTime
+  store    Store    @relation(fields: [store_id], references: [id])
+  store_id String
+
+  @@unique([store_id, date])
+  @@map("invoicings")
+}
+
+model Loss {
+  id       String   @id @default(uuid())
+  value    Float
+  date     DateTime
+  store    Store    @relation(fields: [store_id], references: [id])
+  store_id String
+
+  @@unique([store_id, date])
+  @@map("losses")
+}
+
+model Manager {
+  id       Int    @id @default(autoincrement())
+  user     User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  position String
+
+  user_id     String       @unique
+  store       Store        @relation(fields: [store_id], references: [id])
+  store_id    String
+  completions Completion[]
+
+  @@map("managers")
 }
 
 model Task {
@@ -53,10 +90,10 @@ model Completion {
   completed_at DateTime @default(now())
   is_valid     Boolean  @default(false)
 
-  task   Task   @relation(fields: [taskId], references: [id])
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
-  taskId String
+  task       Task    @relation(fields: [task_id], references: [id])
+  manager    Manager @relation(fields: [manager_id], references: [id])
+  task_id    String
+  manager_id Int
 
   @@map("completions")
 }

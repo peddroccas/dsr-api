@@ -24,7 +24,7 @@ export async function getPendingTasksByManager({
       by: ['taskId'],
       _count: true,
       where: {
-        userId: managerId,
+        managerId: managerId,
         completed_at: { gte: startOfWeek, lte: endOfWeek },
       },
     })

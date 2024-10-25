@@ -7,7 +7,6 @@ interface CreateNewUserRequest {
   name: string
   email: string
   role: 'ADMIN' | 'MANAGER'
-  storeId: string | undefined
 }
 
 interface CreateNewUserResponse {
@@ -18,7 +17,6 @@ export async function createNewUser({
   name,
   email,
   role,
-  storeId,
 }: CreateNewUserRequest): Promise<CreateNewUserResponse> {
   const password_hash = await hash('123456', 6)
 
@@ -29,7 +27,6 @@ export async function createNewUser({
       name: name,
       email: email,
       role: role,
-      store_id: storeId,
       password_hash,
     },
     select: {

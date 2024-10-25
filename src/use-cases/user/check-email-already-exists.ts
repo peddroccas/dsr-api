@@ -2,7 +2,7 @@ import { prisma } from '../../lib/prisma'
 import { DuplicatedCredentialsError } from '../errors/duplicated-credentials'
 
 interface CheckEmailAlreadyExistsRequest {
-  id: string
+  id?: string
   email: string
 }
 
@@ -16,6 +16,11 @@ export async function checkEmailAlreadyExists({
 
   const emailAlreadyExists = Boolean(user)
 
+  if (!id) {
+    if (emailAlreadyExists) {
+      throw new DuplicatedCredentialsError()
+    }
+  }
   if (user) {
     if (user.id !== id && emailAlreadyExists) {
       throw new DuplicatedCredentialsError()
