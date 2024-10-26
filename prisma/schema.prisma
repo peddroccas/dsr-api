@@ -63,9 +63,8 @@ model Loss {
 }
 
 model Manager {
-  id       Int    @id @default(autoincrement())
-  user     User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  position String
+  id   Int  @id @default(autoincrement())
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   user_id     String       @unique
   store       Store        @relation(fields: [store_id], references: [id])
