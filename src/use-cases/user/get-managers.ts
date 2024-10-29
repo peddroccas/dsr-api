@@ -31,6 +31,5 @@ export async function getManagers(): Promise<getManagersResponse> {
         return manager
       })
     )
-
   return { managers }
 }

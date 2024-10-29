@@ -7,6 +7,7 @@ import { deleteUserRoute } from '../routes/delete-user'
 import { getManagersRoute } from '../routes/get-managers'
 import { profileRoute } from '../routes/profile'
 import { createFirstAdminRoute } from '../routes/create-first-admin'
+import { createNewManagerRoute } from '../routes/create-manager'
 
 export async function userRoutes(app: FastifyInstance) {
   app.register(loginRoute)
@@ -18,6 +19,9 @@ export async function userRoutes(app: FastifyInstance) {
   // Admins
   app.register(createNewAdminRoute)
   app.register(createFirstAdminRoute)
+
+  // Managers
+  app.register(createNewManagerRoute)
 
   app.register(getManagersRoute)
 }
