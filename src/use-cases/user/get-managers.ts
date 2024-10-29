@@ -13,6 +13,7 @@ export async function getManagers(): Promise<getManagersResponse> {
   const managers = await prisma.user
     .findMany({
       where: { role: 'MANAGER' },
+      orderBy: { manager: { store: { name: 'asc' } } },
       select: {
         id: true,
         name: true,
