@@ -12,13 +12,13 @@ export const createNewTaskRoute: FastifyPluginAsyncZod = async app => {
       schema: {
         body: z.object({
           title: z.string(),
-          //monthlyFrequency: z.number().min(1).max(31),
+          weeklyFrequency: z.number().min(1).max(7),
         }),
       },
     },
     async (request, reply) => {
-      const { title } = request.body
-      const { task } = await createNewTask({ title })
+      const { title, weeklyFrequency } = request.body
+      const { task } = await createNewTask({ title, weeklyFrequency })
 
       reply.status(201).send(task)
     }

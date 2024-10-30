@@ -13,7 +13,7 @@ export const getTasksRoute: FastifyPluginAsyncZod = async app => {
     async (request, reply) => {
       const { tasks } = await getTasks()
 
-      reply.status(201).send(tasks)
+      reply.status(200).send(tasks)
     }
   )
 }

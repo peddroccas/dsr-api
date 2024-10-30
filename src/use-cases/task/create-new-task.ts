@@ -4,7 +4,7 @@ import { checkTaskAlreadyExists } from './check-task-already-exists'
 
 interface CreateNewTaskRequest {
   title: string
-  //monthlyFrequency: number
+  weeklyFrequency: number
 }
 
 interface CreateNewTaskResponse {
@@ -13,14 +13,14 @@ interface CreateNewTaskResponse {
 
 export async function createNewTask({
   title,
-  //monthlyFrequency,
+  weeklyFrequency,
 }: CreateNewTaskRequest): Promise<CreateNewTaskResponse> {
   await checkTaskAlreadyExists({ title })
 
   const task = await prisma.task.create({
     data: {
       title,
-      //monthly_frequency: monthlyFrequency,
+      weekly_frequency: weeklyFrequency,
     },
   })
 
