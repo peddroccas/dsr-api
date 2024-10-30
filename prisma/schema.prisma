@@ -18,6 +18,11 @@ enum Role {
   MANAGER
 }
 
+enum CompletionStatus {
+  PENDING
+  APPROVED
+}
+
 model User {
   id            String @id @default(uuid())
   name          String
@@ -84,10 +89,10 @@ model Task {
 }
 
 model Completion {
-  id           String   @id @default(uuid())
+  id           String           @id @default(uuid())
   image        String
-  completed_at DateTime @default(now())
-  is_valid     Boolean  @default(false)
+  completed_at DateTime         @default(now())
+  status       CompletionStatus @default(PENDING)
 
   task       Task    @relation(fields: [task_id], references: [id])
   manager    Manager @relation(fields: [manager_id], references: [id])
