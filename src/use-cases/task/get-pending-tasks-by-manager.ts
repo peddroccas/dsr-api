@@ -2,6 +2,7 @@ import type { Task } from '@prisma/client'
 import { prisma } from '../../lib/prisma'
 import dayjs from 'dayjs'
 import { getTasks } from './get-tasks'
+import { getManager } from '../manager/get-manager'
 
 interface GetPendingTasksByManagerRequest {
   managerId: string
@@ -19,31 +20,37 @@ export async function getPendingTasksByManager({
   const startOfWeek = dayjs().startOf('week').toDate()
   const endOfWeek = dayjs().endOf('week').toDate()
 
+  const { manager } = await getManager({ id: managerId })
+
   const completions = await prisma.completion
     .groupBy({
-      by: ['taskId'],
+      by: ['task_id'],
       _count: true,
       where: {
-        managerId: managerId,
+        manager_id: manager.id,
         completed_at: { gte: startOfWeek, lte: endOfWeek },
       },
     })
     .then(completions =>
       completions.map(completion => {
         return {
-          taskId: completion.taskId,
+          taskId: completion.task_id,
           completionCount: completion._count,
         }
       })
     )
 
-  const pendingTasks: Task[] = []
+  const pendingTasks: {
+    id: string
+    title: string
+    weeklyFrequency: number
+  }[] = []
 
   for (const task of tasks) {
     const isTaskCompleted = completions.some(
       completion =>
         completion.taskId === task.id &&
-        completion.completionCount === task.weekly_frequency
+        completion.completionCount === task.weeklyFrequency
     )
     if (!isTaskCompleted) {
       pendingTasks.push(task)
@@ -59,8 +66,8 @@ export async function getPendingTasksByManager({
 
     const remaining = () =>
       task
-        ? pendingTask.weekly_frequency - task.completionCount
-        : pendingTask.weekly_frequency
+        ? pendingTask.weeklyFrequency - task.completionCount
+        : pendingTask.weeklyFrequency
 
     remainingTasks.push({
       ...pendingTask,
