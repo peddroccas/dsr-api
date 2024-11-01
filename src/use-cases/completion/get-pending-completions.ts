@@ -1,21 +1,19 @@
-import type { Task } from '@prisma/client'
 import { prisma } from '../../lib/prisma'
 import dayjs from 'dayjs'
-import { getManager } from '../manager/get-manager'
 
-interface GetPendingCompletionsResponse {
-  tasks: Task[]
+interface GetCompletionsProps {
+  status: 'APPROVED' | 'PENDING'
 }
 
-export async function getPendingCompletions() {
+export async function getCompletions({ status }: GetCompletionsProps) {
   const startOfWeek = dayjs().startOf('week').toDate()
   const endOfWeek = dayjs().endOf('week').toDate()
 
-  const pendingCompletions = await prisma.manager.findMany({
+  const completions = await prisma.manager.findMany({
     where: {
       completions: {
         some: {
-          status: 'PENDING',
+          status,
           completedAt: { gte: startOfWeek, lte: endOfWeek },
         },
       },
@@ -40,5 +38,5 @@ export async function getPendingCompletions() {
     },
   })
 
-  return { pendingCompletions }
+  return { completions }
 }

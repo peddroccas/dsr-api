@@ -3,16 +3,16 @@ import { verifyJWT } from '../middlewares/verify-jwt'
 import { verifyAdmin } from '../middlewares/verify-admin'
 import { getCompletions } from '../../use-cases/completion/get-pending-completions'
 
-export const getPendingCompletionsByManagerRoute: FastifyPluginAsyncZod =
+export const getApprovedCompletionsByManagerRoute: FastifyPluginAsyncZod =
   async app => {
     app.get(
-      '/completions/pending',
+      '/completions/approved',
       {
         onRequest: [verifyJWT, verifyAdmin],
       },
       async (request, reply) => {
         const { completions } = await getCompletions({
-          status: 'PENDING',
+          status: 'APPROVED',
         })
 
         reply.status(200).send(completions)
