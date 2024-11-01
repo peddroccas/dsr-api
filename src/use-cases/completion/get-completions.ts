@@ -22,7 +22,7 @@ export async function getCompletions({ status }: GetCompletionsProps) {
       user: { select: { name: true, id: true } },
       completions: {
         where: {
-          status: 'PENDING',
+          status: status,
           completedAt: { gte: startOfWeek, lte: endOfWeek },
         },
         select: {
