@@ -6,7 +6,7 @@ import { deleteCompletion } from '../../use-cases/completion/delete-completion'
 
 export const denieCompletionRoute: FastifyPluginAsyncZod = async app => {
   app.delete(
-    '/completions/denie',
+    '/completions/denie/',
     {
       onRequest: [verifyJWT, verifyAdmin],
       schema: {
