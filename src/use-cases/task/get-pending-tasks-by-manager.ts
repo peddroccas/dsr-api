@@ -24,17 +24,17 @@ export async function getPendingTasksByManager({
 
   const completions = await prisma.completion
     .groupBy({
-      by: ['task_id'],
+      by: ['taskId'],
       _count: true,
       where: {
-        manager_id: manager.id,
-        completed_at: { gte: startOfWeek, lte: endOfWeek },
+        managerId: manager.id,
+        completedAt: { gte: startOfWeek, lte: endOfWeek },
       },
     })
     .then(completions =>
       completions.map(completion => {
         return {
-          taskId: completion.task_id,
+          taskId: completion.taskId,
           completionCount: completion._count,
         }
       })
