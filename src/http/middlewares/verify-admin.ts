@@ -1,14 +1,21 @@
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import { UnauthorizedError } from '../../use-cases/errors/unauthorized'
+import { getProfile } from '../../use-cases/user/get-profile'
 
 export async function verifyAdmin(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
   try {
-    const role = request.user.role
+    const id = request.user.sub
 
-    if (role !== 'ADMIN') {
+    if (!id) {
+      throw new UnauthorizedError()
+    }
+
+    const { profile } = await getProfile({ id })
+
+    if (profile.role !== 'ADMIN') {
       throw new UnauthorizedError()
     }
   } catch (error) {

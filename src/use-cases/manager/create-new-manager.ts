@@ -1,6 +1,5 @@
 import type { Manager } from '@prisma/client'
 import { prisma } from '../../lib/prisma'
-import { hash } from 'bcryptjs'
 
 interface CreateNewManagerRequest {
   userId: string
@@ -16,7 +15,7 @@ export async function createNewManager({
   storeId,
 }: CreateNewManagerRequest): Promise<CreateNewManagerResponse> {
   const manager = await prisma.manager.create({
-    data: { user_id: userId, store_id: storeId },
+    data: { userId, storeId },
   })
 
   return { manager }

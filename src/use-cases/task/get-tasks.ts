@@ -10,7 +10,7 @@ export async function getTasks(): Promise<GetTasksResponse> {
       return {
         id: task.id,
         title: task.title,
-        weeklyFrequency: task.weekly_frequency,
+        weeklyFrequency: task.weeklyFrequency,
       }
     })
   )

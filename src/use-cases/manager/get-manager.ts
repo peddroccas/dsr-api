@@ -12,7 +12,7 @@ interface GetManagerResponse {
 export async function getManager({
   id,
 }: GetManagerRequest): Promise<GetManagerResponse> {
-  const manager = await prisma.manager.findUnique({ where: { user_id: id } })
+  const manager = await prisma.manager.findUnique({ where: { userId: id } })
 
   if (!manager) {
     throw new Error('Invalid manager')

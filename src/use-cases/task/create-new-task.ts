@@ -20,7 +20,7 @@ export async function createNewTask({
   const task = await prisma.task.create({
     data: {
       title,
-      weekly_frequency: weeklyFrequency,
+      weeklyFrequency,
     },
   })
 

@@ -46,58 +46,58 @@ model Store {
 }
 
 model Invoicing {
-  id       String   @id @default(uuid())
-  value    Float
-  date     DateTime
-  store    Store    @relation(fields: [store_id], references: [id])
-  store_id String
+  id      String   @id @default(uuid())
+  value   Float
+  date    DateTime
+  store   Store    @relation(fields: [storeId], references: [id])
+  storeId String
 
-  @@unique([store_id, date])
+  @@unique([storeId, date])
   @@map("invoicings")
 }
 
 model Loss {
-  id       String   @id @default(uuid())
-  value    Float
-  date     DateTime
-  store    Store    @relation(fields: [store_id], references: [id])
-  store_id String
+  id      String   @id @default(uuid())
+  value   Float
+  date    DateTime
+  store   Store    @relation(fields: [storeId], references: [id])
+  storeId String
 
-  @@unique([store_id, date])
+  @@unique([storeId, date])
   @@map("losses")
 }
 
 model Manager {
   id   Int  @id @default(autoincrement())
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  user_id     String       @unique
-  store       Store        @relation(fields: [store_id], references: [id])
-  store_id    String
+  userId      String       @unique
+  store       Store        @relation(fields: [storeId], references: [id])
+  storeId     String
   completions Completion[]
 
   @@map("managers")
 }
 
 model Task {
-  id               String       @id @default(uuid())
-  title            String       @unique
-  weekly_frequency Int          @default(1)
-  completions      Completion[]
+  id              String       @id @default(uuid())
+  title           String       @unique
+  weeklyFrequency Int          @default(1)
+  completions     Completion[]
 
   @@map("tasks")
 }
 
 model Completion {
-  id           String           @id @default(uuid())
-  image        String
-  completed_at DateTime         @default(now())
-  status       CompletionStatus @default(PENDING)
+  id          String           @id @default(uuid())
+  image       String
+  completedAt DateTime         @default(now())
+  status      CompletionStatus @default(PENDING)
 
-  task       Task    @relation(fields: [task_id], references: [id])
-  manager    Manager @relation(fields: [manager_id], references: [id])
-  task_id    String
-  manager_id Int
+  task      Task    @relation(fields: [taskId], references: [id])
+  manager   Manager @relation(fields: [managerId], references: [id])
+  taskId    String
+  managerId Int
 
   @@map("completions")
 }
