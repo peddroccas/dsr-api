@@ -1,7 +1,7 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { verifyJWT } from '../middlewares/verify-jwt'
 import { verifyAdmin } from '../middlewares/verify-admin'
-import { getCompletions } from '../../use-cases/completion/get-pending-completions'
+import { getCompletions } from '../../use-cases/completion/get-completions'
 
 export const getApprovedCompletionsByManagerRoute: FastifyPluginAsyncZod =
   async app => {
